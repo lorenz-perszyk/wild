@@ -1,0 +1,47 @@
+/* Tailwind */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: "Helvetica", system-ui, sans-serif;
+  }
+
+  /* F O N T - S I Z E */
+  .h0 {
+    @apply font-tungsten font-[600] text-white text-[220px] leading-[0.8] tracking-[0.04em] text-center uppercase;
+  }
+  h1,
+  .h1 {
+    @apply font-tungsten font-bold text-4xl tracking-[4%] uppercase;
+  }
+  h2,
+  .h2 {
+    @apply font-tungsten font-[600] text-base tracking-[0.08em] uppercase;
+  }
+  h3,
+  .h3 {
+    @apply font-tungsten font-[600] leading-[1] tracking-[0.08em] text-3xl;
+  }
+  h4,
+  .h4 {
+    @apply font-bold text-xl lg:text-2xl;
+  }
+  body,
+  p,
+  .p {
+    @apply text-[10px] leading-[1.2] tracking-[0.08em] uppercase;
+  }
+  .small {
+    @apply text-[10px] leading-[1.1] tracking-[0.08em] uppercase;
+  }
+
+  /* C U S T O M   C L A S S E S */
+  .image {
+    @apply rounded-[10px] border border-solid border-black overflow-hidden;
+  }
+  .center {
+    @apply top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
+  }
+}
