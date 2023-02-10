@@ -7,16 +7,16 @@ import { Info } from "./Info";
 type NextSlideProps = {
   nextIndex: number;
   currentIndex: number;
-  nextSlide: () => void;
+  changeSlide: (direction: string) => void;
 };
 
-const NextSlide: FC<NextSlideProps> = ({ nextIndex, currentIndex, nextSlide }) => {
+const NextSlide: FC<NextSlideProps> = ({ nextIndex, currentIndex, changeSlide }) => {
   return (
     <div className="absolute top-4 right-4 w-fit h-[calc(100vh-1rem)] pb-[11vh]">
       <div className="relative h-full flex flex-col justify-between">
         <div
-          onClick={nextSlide}
-          onKeyDown={nextSlide}
+          onClick={() => changeSlide("next")}
+          onKeyDown={() => changeSlide("next")}
           role="button"
           className="image relative group transition duration-500 hover:border-white cursor-pointer"
         >

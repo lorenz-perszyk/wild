@@ -15,8 +15,14 @@ const Info: FC<InfoProps> = ({ index }) => {
         <p>For {imageData[index].client}</p>
       </div>
       <div className="text-right">{imageData[index].date}</div>
-      <button className="small px-4 py-2 rounded-full bg-white text-[#202020] font-[700] transition-bg duration-300 hover:bg-gray-300">
-        Have A Look
+      <button
+        className="small relative flex items-center overflow-hidden px-4 py-2 rounded-full bg-white group
+         after:absolute after:bottom-0 after:left-0 after:w-full after:h-0 after:bg-[#202020] after:transition-all after:duration-300 after:ease-out
+         hover:after:h-full"
+      >
+        <p className="relative z-10 text-[#202020] font-[700] transition duration-300 group-hover:text-white">
+          Have A Look
+        </p>
       </button>
     </div>
   );

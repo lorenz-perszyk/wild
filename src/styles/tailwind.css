@@ -10,7 +10,7 @@
 
   /* F O N T - S I Z E */
   .h0 {
-    @apply font-tungsten font-[600] text-white text-[220px] leading-[0.8] tracking-[0.04em] text-center uppercase;
+    @apply font-tungsten font-[600] text-white text-[13.75vw] leading-[0.8] tracking-[0.04em] text-center uppercase;
   }
   h1,
   .h1 {

@@ -45,6 +45,7 @@ body {
 
 /* CURSOR STYLES */
 #cursor {
+  pointer-events: none;
   background-color: white;
   height: 4px;
   width: 4px;
@@ -53,27 +54,27 @@ body {
   -webkit-border-radius: 50%;
   position: fixed;
   z-index: 1;
-  opacity: 0.5;
-  transition: opacity 0.25s linear;
+  opacity: 1;
+  transform: rotate(-90deg);
+  transition: opacity 250ms, scale 250ms;
 }
 
-[data-c-show] #cursor {
-  opacity: 1;
-  transition: opacity 0.25s linear;
+#cursor.hidden {
+  opacity: 0;
+  /* transition: opacity 0.25s linear; */
 }
 
 svg {
-  background-size: cover;
   transform: translateX(calc(-50% + 2px)) translateY(calc(-50% + 2px));
+  transition: 250ms linear;
 }
 
 circle {
   fill: none;
-  stroke-width: 2px;
+  stroke-width: 1px;
   stroke: white;
   stroke-linecap: round;
-  transform: translateX(calc(-50% + 2px)) translateY(calc(-50% + 2px));
-  transition: 250ms linear;
+  transition: 500ms;
 }
 
 circle.back {
@@ -81,7 +82,6 @@ circle.back {
 }
 
 circle.front {
-  stroke: blue;
-  stroke-dasharray: 50;
-  /* stroke-dashoffset: 200; */
+  stroke-dasharray: 0;
+  stroke-dashoffset: 0;
 }

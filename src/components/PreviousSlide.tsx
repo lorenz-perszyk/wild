@@ -5,14 +5,14 @@ import { imageData } from "../ts/data/data";
 // C O M P O N E N T
 type PreviousSlideProps = {
   prevIndex: number;
-  prevSlide: () => void;
+  changeSlide: (direction: string) => void;
 };
 
-const PreviousSlide: FC<PreviousSlideProps> = ({ prevIndex, prevSlide }) => {
+const PreviousSlide: FC<PreviousSlideProps> = ({ prevIndex, changeSlide }) => {
   return (
     <div
-      onClick={prevSlide}
-      onKeyDown={prevSlide}
+      onClick={() => changeSlide("prev")}
+      onKeyDown={() => changeSlide("prev")}
       role="button"
       className="absolute image bottom-4 left-4 w-fit h-fit cursor-pointer group transition duration-500 hover:border-white"
     >
