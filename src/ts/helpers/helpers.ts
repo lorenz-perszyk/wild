@@ -1,3 +1,5 @@
+import { useMemo } from "react";
+
 /* Calculates the next array index and loops if necessary */
 const calcIndexPosition = (index: number, m: number) => {
   const newIndex = index % m;
@@ -15,4 +17,9 @@ const calcProgressBarOffset = (index: number, arrayLength: number) => {
   progressCircle.style.strokeDashoffset = String(offset);
 };
 
-export { calcIndexPosition, calcProgressBarOffset };
+function useGsapContext(scope: any) {
+  const ctx = useMemo(() => gsap.context(() => {}, scope), [scope]);
+  return ctx;
+}
+
+export { calcIndexPosition, calcProgressBarOffset, useGsapContext };

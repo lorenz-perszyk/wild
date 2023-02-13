@@ -1,47 +1,92 @@
-// @ts-nocheck
 // I M P O R T S
 import { FC, useEffect, useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
+import { v4 as uuidv4 } from "uuid";
+import { Transition, TransitionGroup, SwitchTransition } from "react-transition-group";
 import { imageData } from "../ts/data/data";
 import { ProgressDots } from "./ProgressDots";
 
 // C O M P O N E N T
 type CurrentSlideProps = {
   currentIndex: number;
+  direction: string;
+  animationAxis: string;
 };
 
-const CurrentSlide: FC<CurrentSlideProps> = ({ currentIndex }) => {
+const CurrentSlide: FC<CurrentSlideProps> = ({ currentIndex, direction, animationAxis }) => {
   const componentRef = useRef(null);
 
   useLayoutEffect(() => {
-    // console.log("useEffect");
     const ctx = gsap.context(() => {
-      gsap.from(
-        ".title-text",
-        {
-          autoAlpha: 0,
-          y: 20,
-          duration: 1,
-          delay: 1,
-          ease: "power3.out",
-        },
-        componentRef
-      );
-    });
+      gsap.from(".title-text", {
+        autoAlpha: 0,
+        [animationAxis]: direction === "next" ? 15 : -15,
+        duration: 0.8,
+        delay: 0.2,
+        ease: "power3.out",
+      });
+    }, componentRef);
     return () => ctx.revert(); // cleanup!
-  }, [currentIndex]);
+  }, [currentIndex, direction, animationAxis]);
 
+  // F U N C T I O N S
+  function enter(node: HTMLElement) {
+    gsap.from(node, {
+      // [animationAxis]: direction === "next" ? 20 : -20,
+      duration: 0.8,
+      filter: "blur(10px)",
+      autoAlpha: 0.3,
+      scale: 1.1,
+      ease: "power1.out",
+      onStart() {
+        // node.style.position = "absolute";
+      },
+      onComplete() {
+        // node.style.position = "relative";
+        gsap.set(node, { clearProps: "all" });
+      },
+    });
+  }
+
+  function exit(node: HTMLElement) {
+    gsap.to(node, {
+      duration: 0,
+      ease: "none",
+    });
+  }
+
+  // R E N D E R
   return (
-    <div ref={componentRef} className="absolute center w-[32%] h-[75%]">
-      <div className="relative h-full">
-        <div className="title-text h0 w-[180%] absolute center text-outline">{imageData[currentIndex].title}</div>
-        <div className="w-full h-full relative overflow-hidden">
-          <img
-            className="image absolute top-0 left-0 w-full h-full object-cover"
-            src={imageData[currentIndex]["image-high"]}
-            alt={imageData[currentIndex].alt}
-          />
-          <div className="title-text h0 w-[180%] absolute center">{imageData[currentIndex].title}</div>
+    <div ref={componentRef} className="absolute center w-[32%] h-[75vh]">
+      <div className="relative h-full group">
+        <div className="title-text h0 w-[180%] absolute center text-outline text-transparent transition-colors duration-500 group-hover:text-white">
+          {imageData[currentIndex].title}
+        </div>
+        <div id="main-image" className="w-full h-full relative overflow-hidden">
+          <SwitchTransition mode={"in-out"}>
+            <Transition
+              appear
+              mountOnEnter
+              unmountOnExit
+              // nodeRef={imageRef}
+              key={uuidv4()}
+              onEnter={enter}
+              onExit={exit}
+              timeout={{
+                enter: 800,
+                exit: 0,
+              }}
+            >
+              <img
+                className="image absolute top-0 left-0 w-full h-full object-cover"
+                src={imageData[currentIndex].image}
+                alt={imageData[currentIndex].alt}
+              />
+            </Transition>
+          </SwitchTransition>
+          <div className="title-text h0 w-[180%] absolute center text-outline transition-colors duration-500 group-hover:text-transparent">
+            {imageData[currentIndex].title}
+          </div>
           <ProgressDots index={currentIndex} />
         </div>
       </div>

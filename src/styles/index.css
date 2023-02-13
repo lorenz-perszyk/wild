@@ -37,13 +37,22 @@ body {
   min-height: 100vh;
 }
 
+/* T E X T   O U T L I N E */
 .text-outline {
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: white;
-  -webkit-text-fill-color: transparent;
 }
 
-/* CURSOR STYLES */
+/* .text-transparent {
+  -webkit-text-fill-color: transparent;
+} */
+
+.text-filled {
+  -webkit-text-fill-color: unset;
+}
+
+
+/* C U R S O R   S T Y L E S */
 #cursor {
   pointer-events: none;
   background-color: white;
@@ -53,10 +62,10 @@ body {
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
   position: fixed;
-  z-index: 1;
+  z-index: 100;
   opacity: 1;
   transform: rotate(-90deg);
-  transition: opacity 250ms, scale 250ms;
+  transition: opacity 250ms, scale 250ms, transform 250ms ease-out;
 }
 
 #cursor.hidden {
@@ -64,9 +73,14 @@ body {
   /* transition: opacity 0.25s linear; */
 }
 
+#cursor.grow {
+  height: 40px;
+  width: 40px;
+}
+
 svg {
   transform: translateX(calc(-50% + 2px)) translateY(calc(-50% + 2px));
-  transition: 250ms linear;
+  transition: 150ms linear;
 }
 
 circle {
@@ -84,4 +98,8 @@ circle.back {
 circle.front {
   stroke-dasharray: 0;
   stroke-dashoffset: 0;
+}
+
+button, [role="button"] {
+  cursor: none;
 }
