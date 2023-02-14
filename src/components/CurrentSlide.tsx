@@ -16,20 +16,23 @@ type CurrentSlideProps = {
 const CurrentSlide: FC<CurrentSlideProps> = ({ currentIndex, direction, animationAxis }) => {
   const componentRef = useRef(null);
 
+  // F U N C T I O N S
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       gsap.from(".title-text", {
         autoAlpha: 0,
-        [animationAxis]: direction === "next" ? 15 : -15,
+        [animationAxis]: direction === "next" ? 20 : -20,
         duration: 0.8,
         delay: 0.2,
         ease: "power3.out",
+        onComplete() {
+          // gsap.set(".title-text", { clearProps: "all" });
+        },
       });
     }, componentRef);
     return () => ctx.revert(); // cleanup!
   }, [currentIndex, direction, animationAxis]);
 
-  // F U N C T I O N S
   function enter(node: HTMLElement) {
     gsap.from(node, {
       // [animationAxis]: direction === "next" ? 20 : -20,
@@ -38,11 +41,7 @@ const CurrentSlide: FC<CurrentSlideProps> = ({ currentIndex, direction, animatio
       autoAlpha: 0.3,
       scale: 1.1,
       ease: "power1.out",
-      onStart() {
-        // node.style.position = "absolute";
-      },
       onComplete() {
-        // node.style.position = "relative";
         gsap.set(node, { clearProps: "all" });
       },
     });
@@ -57,12 +56,12 @@ const CurrentSlide: FC<CurrentSlideProps> = ({ currentIndex, direction, animatio
 
   // R E N D E R
   return (
-    <div ref={componentRef} className="absolute center w-[32%] h-[75vh]">
-      <div className="relative h-full group">
-        <div className="title-text h0 w-[180%] absolute center text-outline text-transparent transition-colors duration-500 group-hover:text-white">
+    <div id="image-main" ref={componentRef} className="absolute center w-[32%] h-[75vh]">
+      <div className="relative h-full">
+        <div id="title-back" className="title-text h0 w-[180%] absolute center text-outline text-transparent">
           {imageData[currentIndex].title}
         </div>
-        <div id="main-image" className="w-full h-full relative overflow-hidden">
+        <div id="image-current" className="image w-full h-full relative overflow-hidden">
           <SwitchTransition mode={"in-out"}>
             <Transition
               appear
@@ -78,13 +77,13 @@ const CurrentSlide: FC<CurrentSlideProps> = ({ currentIndex, direction, animatio
               }}
             >
               <img
-                className="image absolute top-0 left-0 w-full h-full object-cover"
+                className="absolute top-0 left-0 w-full h-full object-cover"
                 src={imageData[currentIndex].image}
                 alt={imageData[currentIndex].alt}
               />
             </Transition>
           </SwitchTransition>
-          <div className="title-text h0 w-[180%] absolute center text-outline transition-colors duration-500 group-hover:text-transparent">
+          <div id="title-front" className="title-text h0 w-[180%] absolute center text-outline">
             {imageData[currentIndex].title}
           </div>
           <ProgressDots index={currentIndex} />

@@ -1,4 +1,6 @@
+// I M P O R T S
 import { useMemo } from "react";
+import gsap from "gsap";
 
 /* Calculates the next array index and loops if necessary */
 const calcIndexPosition = (index: number, m: number) => {
@@ -17,6 +19,7 @@ const calcProgressBarOffset = (index: number, arrayLength: number) => {
   progressCircle.style.strokeDashoffset = String(offset);
 };
 
+// Creates a gsap context instance
 function useGsapContext(scope: any) {
   const ctx = useMemo(() => gsap.context(() => {}, scope), [scope]);
   return ctx;

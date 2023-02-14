@@ -4,7 +4,6 @@ import gsap from "gsap";
 import { v4 as uuidv4 } from "uuid";
 import { Transition, TransitionGroup, SwitchTransition } from "react-transition-group";
 import { imageData } from "../ts/data/data";
-import { exit } from "../ts/helpers/animations";
 
 // C O M P O N E N T
 type PreviousSlideProps = {
@@ -18,12 +17,8 @@ const PreviousSlide: FC<PreviousSlideProps> = ({ prevIndex, direction, animation
   const component = useRef(null);
   const titleRef = useRef(null);
   const imageRef = useRef(null);
-  // function useGsapContext(scope: any) {
-  //   const ctx = useMemo(() => gsap.context(() => {}, scope), [scope]);
-  //   return ctx;
-  // }
-  // const ctx = useGsapContext(component);
 
+  // F U N C T I O N S
   function enter(node: HTMLElement) {
     gsap.from(node, {
       // [animationAxis]: direction === "next" ? 20 : -20,
@@ -50,8 +45,10 @@ const PreviousSlide: FC<PreviousSlideProps> = ({ prevIndex, direction, animation
     });
   }
 
+  // R E N D E R
   return (
     <div
+      id="image-prev"
       ref={component}
       onClick={() => changeSlide("prev")}
       onKeyDown={() => changeSlide("prev")}

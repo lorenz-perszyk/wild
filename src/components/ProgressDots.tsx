@@ -8,8 +8,9 @@ type ProgressDotsProps = {
 };
 
 const ProgressDots: FC<ProgressDotsProps> = ({ index }) => {
+  // R E N D E R
   return (
-    <div className="absolute left-1/2 -translate-x-1/2 bottom-[20%] flex flex-row gap-6">
+    <div id="dots" className="absolute left-1/2 -translate-x-1/2 bottom-[20%] flex flex-row gap-6">
       <div className="flex flex-row gap-1">
         <div className="small inline-block">{index + 1}</div>
         <div className="small inline-block">of</div>

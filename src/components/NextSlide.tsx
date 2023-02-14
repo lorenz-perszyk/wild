@@ -4,7 +4,6 @@ import gsap from "gsap";
 import { v4 as uuidv4 } from "uuid";
 import { Transition, TransitionGroup, SwitchTransition } from "react-transition-group";
 import { imageData } from "../ts/data/data";
-import { exit } from "../ts/helpers/animations";
 import { Info } from "./Info";
 
 // C O M P O N E N T
@@ -17,6 +16,7 @@ type NextSlideProps = {
 };
 
 const NextSlide: FC<NextSlideProps> = ({ nextIndex, currentIndex, direction, animationAxis, changeSlide }) => {
+  // F U N C T I O N S
   function enter(node: HTMLElement) {
     gsap.from(node, {
       // [animationAxis]: direction === "next" ? 20 : -20,
@@ -25,11 +25,7 @@ const NextSlide: FC<NextSlideProps> = ({ nextIndex, currentIndex, direction, ani
       autoAlpha: 0.3,
       scale: 1.05,
       ease: "power1.out",
-      onStart() {
-        // node.style.position = "absolute";
-      },
       onComplete() {
-        // node.style.position = "relative";
         gsap.set(node, { clearProps: "all" });
       },
     });
@@ -41,14 +37,17 @@ const NextSlide: FC<NextSlideProps> = ({ nextIndex, currentIndex, direction, ani
       ease: "none",
     });
   }
+
+  // R E N D E R
   return (
-    <div className="absolute top-4 right-4 w-fit h-[calc(100vh-1rem)] pb-[11vh]">
+    <div id="next-comp" className="absolute top-4 right-4 w-fit h-[calc(100vh-1rem)] pb-[11vh]">
       <div className="relative h-full flex flex-col justify-between">
         <div
+          id="image-next"
           onClick={() => changeSlide("next")}
           onKeyDown={() => changeSlide("next")}
           role="button"
-          className="image relative group transition duration-500 hover:border-white"
+          className="image relative group transition-colors duration-500 hover:border-white"
         >
           <div className="relative h-[36vh] aspect-[3/4]">
             <SwitchTransition mode={"in-out"}>

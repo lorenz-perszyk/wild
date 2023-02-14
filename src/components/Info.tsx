@@ -8,8 +8,9 @@ type InfoProps = {
 };
 
 const Info: FC<InfoProps> = ({ index }) => {
+  // R E N D E R
   return (
-    <div className="w-[110px] flex flex-col gap-4">
+    <div id="info-box" className="w-[110px] flex flex-col gap-4">
       <div className="text-left">
         <p>Lorenz Perszyk</p>
         <p>For {imageData[index].client}</p>

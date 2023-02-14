@@ -15,6 +15,7 @@ type BackgroundImageProps = {
 const BackgroundImage: FC<BackgroundImageProps> = ({ currentIndex, direction, animationAxis }) => {
   const imageRef = useRef(null);
 
+  // R E N D E R
   return (
     <div className="relative w-screen h-screen">
       <SwitchTransition mode={"in-out"}>
@@ -30,7 +31,7 @@ const BackgroundImage: FC<BackgroundImageProps> = ({ currentIndex, direction, an
             const ctx = gsap.context(() => {
               gsap.from(node, {
                 autoAlpha: 0,
-                // [animationAxis]: direction === "next" ? 50 : -50,
+                [animationAxis]: direction === "next" ? 50 : -50,
                 duration: 0.7,
                 ease: "power1.out",
                 onComplete() {

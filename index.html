@@ -3,18 +3,18 @@
   <head>
     <title>Wildcards</title>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/wild_favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
     <div id="cursor">
-      <svg viewBox="0 0 42 42" xmlns="http://www.w3.org/2000/svg" width="40px" height="40px">
-        <circle class="back" cx="21" cy="21" r="20" width="40px" height="40px" />
-        <circle class="front" cx="21" cy="21" r="20" width="40px" height="40px" id="progress-circle" />
+      <svg id="cursor-dot" viewBox="0 0 42 42" xmlns="http://www.w3.org/2000/svg" width="40px" height="40px">
+        <circle class="back" cx="21" cy="21" r="20" />
+        <circle id="progress-circle" class="front" cx="21" cy="21" r="20"  />
       </svg>
     </div>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-    <script type="module" src="/src/ts/cursor.tsx"></script>
+    <script type="module" src="/src/ts/cursor.ts"></script>
   </body>
 </html>

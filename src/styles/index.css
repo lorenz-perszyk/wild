@@ -47,9 +47,9 @@ body {
   -webkit-text-fill-color: transparent;
 } */
 
-.text-filled {
+/* .text-filled {
   -webkit-text-fill-color: unset;
-}
+} */
 
 
 /* C U R S O R   S T Y L E S */
@@ -66,16 +66,17 @@ body {
   opacity: 1;
   transform: rotate(-90deg);
   transition: opacity 250ms, scale 250ms, transform 250ms ease-out;
+  transition: 250ms;
 }
 
-#cursor.hidden {
+/* #cursor.hidden {
   opacity: 0;
-  /* transition: opacity 0.25s linear; */
-}
+  transition: opacity 0.25s linear;
+} */
 
-#cursor.grow {
-  height: 40px;
-  width: 40px;
+#cursor.cursor-grow {
+  height: 50px;
+  width: 50px;
 }
 
 svg {
@@ -96,8 +97,8 @@ circle.back {
 }
 
 circle.front {
-  stroke-dasharray: 0;
-  stroke-dashoffset: 0;
+  /* stroke-dasharray: 0;
+  stroke-dashoffset: 0; */
 }
 
 button, [role="button"] {
