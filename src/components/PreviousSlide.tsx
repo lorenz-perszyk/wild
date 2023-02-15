@@ -1,43 +1,35 @@
 // I M P O R T S
-import { FC, useRef, useMemo } from "react";
+import { FC, useRef } from "react";
 import gsap from "gsap";
 import { v4 as uuidv4 } from "uuid";
-import { Transition, TransitionGroup, SwitchTransition } from "react-transition-group";
+import { Transition, SwitchTransition } from "react-transition-group";
 import { imageData } from "../ts/data/data";
 
 // C O M P O N E N T
 type PreviousSlideProps = {
   prevIndex: number;
-  direction: string;
-  animationAxis: string;
   changeSlide: (direction: string) => void;
 };
 
-const PreviousSlide: FC<PreviousSlideProps> = ({ prevIndex, direction, animationAxis, changeSlide }) => {
+const PreviousSlide: FC<PreviousSlideProps> = ({ prevIndex, changeSlide }) => {
   const component = useRef(null);
   const titleRef = useRef(null);
-  const imageRef = useRef(null);
 
   // F U N C T I O N S
+  // Image Enter Animation
   function enter(node: HTMLElement) {
     gsap.from(node, {
-      // [animationAxis]: direction === "next" ? 20 : -20,
-      // xPercent: 100,
       duration: 0.8,
       filter: "blur(10px)",
       autoAlpha: 0.3,
       scale: 1.05,
       ease: "power3.out",
-      onStart() {
-        // node.style.position = "absolute";
-      },
       onComplete() {
-        // node.style.position = "relative";
         gsap.set(node, { clearProps: "all" });
       },
     });
   }
-
+  // Image Exit Animation
   function exit(node: HTMLElement) {
     gsap.to(node, {
       duration: 0,
@@ -53,7 +45,7 @@ const PreviousSlide: FC<PreviousSlideProps> = ({ prevIndex, direction, animation
       onClick={() => changeSlide("prev")}
       onKeyDown={() => changeSlide("prev")}
       role="button"
-      className="absolute image bottom-4 left-4 w-fit h-fit group transition-colors duration-500 hover:border-white"
+      className="absolute image bottom-4 left-4 w-fit h-fit group transition-colors duration-500 hover:border-white hidden lg:block"
     >
       <div className="relative h-[36vh] aspect-[3/4]">
         <SwitchTransition mode={"in-out"}>
@@ -61,7 +53,6 @@ const PreviousSlide: FC<PreviousSlideProps> = ({ prevIndex, direction, animation
             appear
             mountOnEnter
             unmountOnExit
-            // nodeRef={imageRef}
             key={uuidv4()}
             onEnter={enter}
             onExit={exit}
@@ -71,7 +62,6 @@ const PreviousSlide: FC<PreviousSlideProps> = ({ prevIndex, direction, animation
             }}
           >
             <img
-              // ref={imageRef}
               className="absolute inline-block top-0 left-0 h-full w-[auto]"
               src={imageData[prevIndex].image}
               alt={imageData[prevIndex].alt}

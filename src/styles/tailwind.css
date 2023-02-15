@@ -10,11 +10,11 @@
 
   /* F O N T - S I Z E */
   .h0 {
-    @apply font-tungsten font-[600] text-white text-[13.75vw] leading-[0.8] tracking-[0.04em] text-center uppercase;
+    @apply font-tungsten font-[600] text-white text-[140px] lg:text-[13.75vw] leading-[0.8] tracking-[0.04em] text-center uppercase;
   }
   h1,
   .h1 {
-    @apply font-tungsten font-bold text-4xl tracking-[4%] uppercase;
+    @apply font-tungsten font-[600] text-4xl leading-[0.8] tracking-[0.04em] uppercase;
   }
   h2,
   .h2 {

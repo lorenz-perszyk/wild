@@ -4,4 +4,5 @@ export type Image = {
   title: string;
   date: string;
   alt: string;
+  description: string;
 };

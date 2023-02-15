@@ -2,7 +2,7 @@
 import { FC } from "react";
 import gsap from "gsap";
 import { v4 as uuidv4 } from "uuid";
-import { Transition, TransitionGroup, SwitchTransition } from "react-transition-group";
+import { Transition, SwitchTransition } from "react-transition-group";
 import { imageData } from "../ts/data/data";
 import { Info } from "./Info";
 
@@ -10,16 +10,15 @@ import { Info } from "./Info";
 type NextSlideProps = {
   nextIndex: number;
   currentIndex: number;
-  direction: string;
-  animationAxis: string;
   changeSlide: (direction: string) => void;
+  detailsIn: any;
 };
 
-const NextSlide: FC<NextSlideProps> = ({ nextIndex, currentIndex, direction, animationAxis, changeSlide }) => {
+const NextSlide: FC<NextSlideProps> = ({ nextIndex, currentIndex, changeSlide, detailsIn }) => {
   // F U N C T I O N S
+  // Image Enter Animation
   function enter(node: HTMLElement) {
     gsap.from(node, {
-      // [animationAxis]: direction === "next" ? 20 : -20,
       duration: 0.8,
       filter: "blur(10px)",
       autoAlpha: 0.3,
@@ -31,6 +30,7 @@ const NextSlide: FC<NextSlideProps> = ({ nextIndex, currentIndex, direction, ani
     });
   }
 
+  // Image Exit Animation
   function exit(node: HTMLElement) {
     gsap.to(node, {
       duration: 0,
@@ -40,14 +40,14 @@ const NextSlide: FC<NextSlideProps> = ({ nextIndex, currentIndex, direction, ani
 
   // R E N D E R
   return (
-    <div id="next-comp" className="absolute top-4 right-4 w-fit h-[calc(100vh-1rem)] pb-[11vh]">
+    <div id="next-comp" className="absolute z-20 top-4 right-4 w-fit h-[calc(100vh-1rem)] pb-[11vh]">
       <div className="relative h-full flex flex-col justify-between">
         <div
           id="image-next"
           onClick={() => changeSlide("next")}
           onKeyDown={() => changeSlide("next")}
           role="button"
-          className="image relative group transition-colors duration-500 hover:border-white"
+          className="image relative group transition-colors duration-500 hover:border-white invisible lg:visible"
         >
           <div className="relative h-[36vh] aspect-[3/4]">
             <SwitchTransition mode={"in-out"}>
@@ -79,7 +79,7 @@ const NextSlide: FC<NextSlideProps> = ({ nextIndex, currentIndex, direction, ani
             </h3>
           </div>
         </div>
-        <Info index={currentIndex} />
+        <Info index={currentIndex} detailsIn={detailsIn} />
       </div>
     </div>
   );

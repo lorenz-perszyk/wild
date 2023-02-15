@@ -1,4 +1,4 @@
-<img src="https://user-images.githubusercontent.com/108495458/216027132-c4324517-d3e5-4fa3-9f0d-14a91cc1ed7a.png" alt="landing page" width="800"/>
+<img width="800" alt="wild" src="https://user-images.githubusercontent.com/108495458/218796537-2b3e605f-56bb-41b6-80e3-865c63748052.png">
 
 # Wild
 

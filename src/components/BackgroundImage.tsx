@@ -1,5 +1,5 @@
 // I M P O R T S
-import { FC, useRef, useState, useLayoutEffect, useEffect } from "react";
+import { FC, useRef } from "react";
 import gsap from "gsap";
 import { v4 as uuidv4 } from "uuid";
 import { Transition, SwitchTransition } from "react-transition-group";
@@ -9,10 +9,9 @@ import { imageData } from "../ts/data/data";
 type BackgroundImageProps = {
   currentIndex: number;
   direction: string;
-  animationAxis: string;
 };
 
-const BackgroundImage: FC<BackgroundImageProps> = ({ currentIndex, direction, animationAxis }) => {
+const BackgroundImage: FC<BackgroundImageProps> = ({ currentIndex, direction }) => {
   const imageRef = useRef(null);
 
   // R E N D E R
@@ -21,7 +20,6 @@ const BackgroundImage: FC<BackgroundImageProps> = ({ currentIndex, direction, an
       <SwitchTransition mode={"in-out"}>
         <Transition
           key={uuidv4()}
-          // nodeRef={imageRef}
           mountOnEnter
           unmountOnExit
           timeout={{
@@ -31,16 +29,15 @@ const BackgroundImage: FC<BackgroundImageProps> = ({ currentIndex, direction, an
             const ctx = gsap.context(() => {
               gsap.from(node, {
                 autoAlpha: 0,
-                [animationAxis]: direction === "next" ? 50 : -50,
+                y: direction === "next" ? 80 : -80,
                 duration: 0.7,
                 ease: "power1.out",
                 onComplete() {
-                  // gsap.set(node, { clearProps: "all" });
                   done();
                 },
               });
             }, node);
-            return () => ctx.revert(); // cleanup!
+            return () => ctx.revert();
           }}
         >
           <div

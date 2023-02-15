@@ -1,8 +1,8 @@
 // I M P O R T S
-import { FC, useEffect, useLayoutEffect, useRef } from "react";
+import { FC, useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { v4 as uuidv4 } from "uuid";
-import { Transition, TransitionGroup, SwitchTransition } from "react-transition-group";
+import { Transition, SwitchTransition } from "react-transition-group";
 import { imageData } from "../ts/data/data";
 import { ProgressDots } from "./ProgressDots";
 
@@ -10,32 +10,33 @@ import { ProgressDots } from "./ProgressDots";
 type CurrentSlideProps = {
   currentIndex: number;
   direction: string;
-  animationAxis: string;
 };
 
-const CurrentSlide: FC<CurrentSlideProps> = ({ currentIndex, direction, animationAxis }) => {
+const CurrentSlide: FC<CurrentSlideProps> = ({ currentIndex, direction }) => {
   const componentRef = useRef(null);
 
   // F U N C T I O N S
+  // Animate the Main Title
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       gsap.from(".title-text", {
+        y: direction === "next" ? 25 : -25,
         autoAlpha: 0,
-        [animationAxis]: direction === "next" ? 20 : -20,
         duration: 0.8,
         delay: 0.2,
         ease: "power3.out",
         onComplete() {
-          // gsap.set(".title-text", { clearProps: "all" });
+          gsap.set(".title-text", { clearProps: "all" });
         },
       });
     }, componentRef);
     return () => ctx.revert(); // cleanup!
-  }, [currentIndex, direction, animationAxis]);
+  }, [currentIndex, direction]);
 
+  // Image Enter Animation
   function enter(node: HTMLElement) {
     gsap.from(node, {
-      // [animationAxis]: direction === "next" ? 20 : -20,
+      y: direction === "next" ? 20 : -20,
       duration: 0.8,
       filter: "blur(10px)",
       autoAlpha: 0.3,
@@ -46,7 +47,7 @@ const CurrentSlide: FC<CurrentSlideProps> = ({ currentIndex, direction, animatio
       },
     });
   }
-
+  // Image Exit Animation
   function exit(node: HTMLElement) {
     gsap.to(node, {
       duration: 0,
@@ -56,8 +57,8 @@ const CurrentSlide: FC<CurrentSlideProps> = ({ currentIndex, direction, animatio
 
   // R E N D E R
   return (
-    <div id="image-main" ref={componentRef} className="absolute center w-[32%] h-[75vh]">
-      <div className="relative h-full">
+    <div id="image-main" ref={componentRef} className="absolute z-50 center w-[32%] h-[75vh] min-w-[330px]">
+      <div className="relative h-full w-full">
         <div id="title-back" className="title-text h0 w-[180%] absolute center text-outline text-transparent">
           {imageData[currentIndex].title}
         </div>
@@ -67,7 +68,6 @@ const CurrentSlide: FC<CurrentSlideProps> = ({ currentIndex, direction, animatio
               appear
               mountOnEnter
               unmountOnExit
-              // nodeRef={imageRef}
               key={uuidv4()}
               onEnter={enter}
               onExit={exit}

@@ -4,10 +4,6 @@
   box-sizing: border-box;
 }
 
-* {
-  /* outline: 1px solid red; */
-}
-
 :root {
   font-family: Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -43,15 +39,6 @@ body {
   -webkit-text-stroke-color: white;
 }
 
-/* .text-transparent {
-  -webkit-text-fill-color: transparent;
-} */
-
-/* .text-filled {
-  -webkit-text-fill-color: unset;
-} */
-
-
 /* C U R S O R   S T Y L E S */
 #cursor {
   pointer-events: none;
@@ -66,13 +53,7 @@ body {
   opacity: 1;
   transform: rotate(-90deg);
   transition: opacity 250ms, scale 250ms, transform 250ms ease-out;
-  transition: 250ms;
 }
-
-/* #cursor.hidden {
-  opacity: 0;
-  transition: opacity 0.25s linear;
-} */
 
 #cursor.cursor-grow {
   height: 50px;
@@ -94,11 +75,6 @@ circle {
 
 circle.back {
   opacity: 0.1;
-}
-
-circle.front {
-  /* stroke-dasharray: 0;
-  stroke-dashoffset: 0; */
 }
 
 button, [role="button"] {

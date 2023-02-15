@@ -10,6 +10,7 @@ import "./styles/index.css";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(<App />);
 
+// Deactivated because of problems with React-Transition-Group and Gsap
 /*   <React.StrictMode>
     <App />
   </React.StrictMode> */
