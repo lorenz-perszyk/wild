@@ -10,6 +10,7 @@ import { NextSlide } from "./NextSlide";
 import { PreviousSlide } from "./PreviousSlide";
 import { BackgroundImage } from "./BackgroundImage";
 import { InfoDetailed } from "./InfoDetailed";
+import { IntroScreen } from "./IntroScreen";
 
 // C O M P O N E N T
 const Slider: FC = () => {
@@ -46,7 +47,6 @@ const Slider: FC = () => {
   });
 
   useLayoutEffect(() => {
-    const infoTitle = new SplitType("#info-title", { types: "lines" });
     const infoText = new SplitType("#info-text", { types: "lines" });
 
     ctxDetails.add(() => {
@@ -59,7 +59,7 @@ const Slider: FC = () => {
         .to("#image-prev", { x: -40, y: 40, autoAlpha: 0, duration: 0.5, ease: "power3.out" }, "<")
         .to("#info-box", { x: 40, y: 40, autoAlpha: 0, duration: 0.5, ease: "power3.out" }, "<")
         .to("#image-current", { x: "-20vw", duration: 0.8, scale: 1.1, ease: "power2.out" }, "<0.2")
-        .from(infoTitle.lines, { y: 15, autoAlpha: 0, duration: 0.5, ease: "power3.out", stagger: 0.1 }, "<0.3")
+        .from("#info-title", { y: 15, autoAlpha: 0, duration: 0.5, ease: "power3.out", stagger: 0.1 }, "<0.3")
         .from("#info-client", { y: 15, autoAlpha: 0, duration: 0.5, ease: "power3.out" }, "<0.2")
         .from(infoText.lines, { y: 15, autoAlpha: 0, duration: 0.5, ease: "power3.out", stagger: 0.05 }, "<0.2")
         .from("#info-button", { autoAlpha: 0, duration: 0.9, ease: "none" }, "<");
@@ -67,7 +67,7 @@ const Slider: FC = () => {
     ctxDetails.add(() => {
       detailsOut
         .to("#bg-image", { autoAlpha: 1, duration: 1 })
-        .to(infoTitle.lines, { y: 0, autoAlpha: 0, duration: 0.2, ease: "power3.out" }, "<")
+        .to("#info-title", { y: 0, autoAlpha: 0, duration: 0.2, ease: "power3.out" }, "<")
         .to(infoText.lines, { y: 0, autoAlpha: 0, duration: 0.2, ease: "power3.out" }, "<")
         .to("#info-client", { y: 0, autoAlpha: 0, duration: 0.2, ease: "power3.out" }, "<")
         .to("#info-button", { autoAlpha: 0, duration: 0.2, ease: "none" }, "<")
@@ -79,14 +79,17 @@ const Slider: FC = () => {
         .to("#title-front", { y: 0, autoAlpha: 1, ease: "power2.out", duration: 0.8 }, "-=0.4")
         .to("#title-back", { y: 0, autoAlpha: 1, ease: "power2.out", duration: 0.8 }, "<");
     });
-    return () => ctxDetails.revert();
+    return () => {
+      ctxDetails.revert();
+      infoText.revert();
+    };
   }, [currentIndex]);
 
   // Activate Scrolling after the intro animation has finished
   useLayoutEffect(() => {
     setTimeout(() => {
       window.addEventListener("wheel", throttledWheelHandler);
-    }, 5400);
+    }, 5000);
   }, []);
 
   // Update the Circular Progress Bar
@@ -98,7 +101,7 @@ const Slider: FC = () => {
     wheelHandlerProxy(rolledValue);
   }, [rolledValue]);
 
-  // Sets the slider direction and movement axis, then updates the slider index
+  // Sets the slider direction, then updates the slider index
   function changeSlide(direction: string) {
     setSliderDirection(direction);
     const nextIndex = direction === "next" ? currentIndex + 1 : currentIndex - 1;
@@ -127,9 +130,7 @@ const Slider: FC = () => {
       <CurrentSlide currentIndex={currentIndex} direction={sliderDirection} />
       <PreviousSlide prevIndex={prevIndex} changeSlide={changeSlide} />
       <InfoDetailed currentIndex={currentIndex} detailsOut={detailsOut} />
-      <h3 id="intro-title" className="absolute center text-5xl invisible">
-        XYZ Photography
-      </h3>
+      <IntroScreen currentIndex={currentIndex} />
     </div>
   );
 };

@@ -62,19 +62,19 @@ const PreviousSlide: FC<PreviousSlideProps> = ({ prevIndex, changeSlide }) => {
             }}
           >
             <img
-              className="absolute inline-block top-0 left-0 h-full w-[auto]"
+              className="absolute inline-block top-0 left-0 h-full w-[auto] will-change-transform"
               src={imageData[prevIndex].image}
               alt={imageData[prevIndex].alt}
             />
           </Transition>
         </SwitchTransition>
 
-        <div className="absolute top-0 left-0 z-20  h-full w-full transition-[brightness] duration-500 hover:backdrop-brightness-[.65]" />
+        <div className="absolute top-0 left-0 z-20  h-full w-full transition-[backdrop-filter] duration-300 hover:backdrop-brightness-[.65]" />
         <h3
           id="prev-title"
           ref={titleRef}
           className="absolute z-30 w-3/5 left-4 transition-all duration-500 ease-out-cubic -top-8 opacity-0 group-hover:top-2 group-hover:opacity-100
-          text-stroke-black text-stroke-[2]"
+          text-stroke-black text-stroke-[2] pointer-events-none"
         >
           {imageData[prevIndex].title}
         </h3>

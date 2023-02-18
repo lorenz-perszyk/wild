@@ -63,17 +63,17 @@ const NextSlide: FC<NextSlideProps> = ({ nextIndex, currentIndex, changeSlide, d
                 }}
               >
                 <img
-                  className="absolute inline-block top-0 left-0 h-full w-[auto]"
+                  className="absolute inline-block top-0 left-0 h-full w-[auto] will-change-transform"
                   src={imageData[nextIndex].image}
                   alt={imageData[nextIndex].alt}
                 />
               </Transition>
             </SwitchTransition>
 
-            <div className="absolute top-0 left-0 z-20  h-full w-full transition-[brightness] duration-500 hover:backdrop-brightness-[.65]" />
+            <div className="absolute top-0 left-0 z-20  h-full w-full transition-[backdrop-filter] duration-300 hover:backdrop-brightness-[.65]" />
             <h3
               id="prev-title"
-              className="absolute z-30 w-3/5 text-right right-4 transition-all duration-500 ease-out-cubic -bottom-8 opacity-0 group-hover:bottom-2 group-hover:opacity-100"
+              className="absolute z-30 w-3/5 text-right right-4 transition-all duration-500 ease-out-cubic -bottom-8 opacity-0 group-hover:bottom-2 group-hover:opacity-100 pointer-events-none"
             >
               {imageData[nextIndex].title}
             </h3>

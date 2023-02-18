@@ -17,7 +17,7 @@ const ProgressDots: FC<ProgressDotsProps> = ({ index }) => {
         <div className="small inline-block">{imageData.length}</div>
       </div>
       <div className="flex flex-row gap-2">
-        {Array.from({ length: imageData.length }).map((item, dotIndex) => {
+        {imageData.map((item, dotIndex) => {
           const fill = dotIndex === index ? "bg-white" : "bg-none";
           return (
             <div

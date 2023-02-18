@@ -59,7 +59,10 @@ const CurrentSlide: FC<CurrentSlideProps> = ({ currentIndex, direction }) => {
   return (
     <div id="image-main" ref={componentRef} className="absolute z-50 center w-[32%] h-[75vh] min-w-[330px]">
       <div className="relative h-full w-full">
-        <div id="title-back" className="title-text h0 w-[180%] absolute center text-outline text-transparent">
+        <div
+          id="title-back"
+          className="title-text h0 w-[180%] absolute center text-outline text-transparent will-change-transform"
+        >
           {imageData[currentIndex].title}
         </div>
         <div id="image-current" className="image w-full h-full relative overflow-hidden">
@@ -77,13 +80,13 @@ const CurrentSlide: FC<CurrentSlideProps> = ({ currentIndex, direction }) => {
               }}
             >
               <img
-                className="absolute top-0 left-0 w-full h-full object-cover"
+                className="absolute top-0 left-0 w-full h-full object-cover will-change-transform"
                 src={imageData[currentIndex].image}
                 alt={imageData[currentIndex].alt}
               />
             </Transition>
           </SwitchTransition>
-          <div id="title-front" className="title-text h0 w-[180%] absolute center text-outline">
+          <div id="title-front" className="title-text h0 w-[180%] absolute center text-outline will-change-transform">
             {imageData[currentIndex].title}
           </div>
           <ProgressDots index={currentIndex} />
