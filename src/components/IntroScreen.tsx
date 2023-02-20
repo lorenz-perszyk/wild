@@ -12,7 +12,7 @@ const IntroScreen: FC<IntroScreenProps> = ({ currentIndex }) => {
   return (
     <div
       id="intro-title"
-      className="absolute z-50 top-0 left-0 w-full h-full p-4 bg-center bg-large bg-no-repeat invisible"
+      className="absolute z-50 top-0 left-0 w-full h-full p-4 bg-center bg-large bg-no-repeat"
       style={{ backgroundImage: `url(${imageData[currentIndex].image})` }}
     >
       <div className="absolute top-0 left-0 w-full h-full backdrop-blur-[100px]" />

@@ -54,7 +54,7 @@ const Slider: FC = () => {
         .to("#title-front", { y: 25, autoAlpha: 0, ease: "power3.out", duration: 0.6 })
         .to("#title-back", { y: 25, autoAlpha: 0, ease: "power3.out", duration: 0.6 }, "<")
         .to("#dots", { autoAlpha: 0, duration: 0.4, ease: "power3.out" }, "<")
-        .to("#bg-image", { autoAlpha: 0.3, duration: 2.5 }, "<")
+        .to("#bg-image", { autoAlpha: 0.3, duration: 2 }, "<")
         .to("#image-next", { x: 40, y: -40, autoAlpha: 0, duration: 0.5, ease: "power3.out" }, "<")
         .to("#image-prev", { x: -40, y: 40, autoAlpha: 0, duration: 0.5, ease: "power3.out" }, "<")
         .to("#info-box", { x: 40, y: 40, autoAlpha: 0, duration: 0.5, ease: "power3.out" }, "<")
